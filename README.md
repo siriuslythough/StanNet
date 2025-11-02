@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 You can run the code by using the following command.
 ```
-  python yoga_main_single.py \
+  python main.py \
   --root YogaPoses \
   --arch resnet50 \
   --batch_size 8 \
@@ -53,6 +53,7 @@ This repository and its contents are created solely for academic purposes as par
 Authors:
 * Mohd Amir | [mmamir22@iitk.ac.in](mmamir22@iitk.ac.in) (220660)
 * Nishant Pandey | [nishantp22@iitk.ac.in](nishantp22@iitk.ac.in) (220724)
+* Tanmay Siddharth | [tanmays22@iitk.ac.in](tanmays22@iitk.ac.in) (221129)
 
 ## Reference
 [1] S. Yadav and K. R. Jerripothula, “FCCNs: Fully Complex-valued Convolutional Networks using Complex-valued Color Model and Loss Function,” *ICCV*, 2023, pp. 10689–10698. [PDF](https://openaccess.thecvf.com/content/ICCV2023/papers/Yadav_FCCNs_Fully_Complex-valued_Convolutional_Networks_using_Complex-valued_Color_Model_and_ICCV_2023_paper.pdf) · [OpenAccess page](https://openaccess.thecvf.com/content/ICCV2023/html/Yadav_FCCNs_Fully_Complex-valued_Convolutional_Networks_using_Complex-valued_Color_Model_and_ICCV_2023_paper.html)
