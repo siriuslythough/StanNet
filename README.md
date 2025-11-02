@@ -26,6 +26,7 @@ pip install -r requirements.txt
   ```
   where `...` of course represents the other `.py` files in this repo. Note the dataset folder name `YogaPoses`.
 
+`Note:` Dataset is available [here [YogaPoses]](https://www.kaggle.com/datasets/ujjwalchowdhury/yoga-pose-classification)
 
 `main.py` is our main file. The file is sufficiently self-contained so far as the project is concerned. Ensure you have `YogaPoses [dataset] ` in the same directory as the `.py`.
 
