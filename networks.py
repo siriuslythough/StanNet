@@ -96,7 +96,6 @@ class CDS_E(nn.Module):
 #
 
 # Alexnet implementation in complex numbers
-
 class AlexNet(nn.Module):
     def __init__(self, num_classes: int = 10, dropout= 0.5):
         super().__init__()

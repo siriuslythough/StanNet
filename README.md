@@ -37,8 +37,8 @@ You can run the code by using the following command.
   --arch resnet50 \
   --batch_size 8 \
   --epochs 50 \
-  --lr 1e-3 \
-  --strong_aug
+  --lr 3e-4 \
+  --modelName resnet50
 ```
 `Note` - For detailed explanation of each argument you can refer to python script `main.py`
 

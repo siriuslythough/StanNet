@@ -15,7 +15,7 @@ from utils import ToHSV, ToComplex, progress_bar  # uses rgb_to_hsv_mine and iHS
 
 # Complex backbones from your repo that expect 3 complex input channels
 import networks as models
-import networks_new as models_new
+import stanNet as stan_models
 
 
 def set_seed(seed: int = 42):
@@ -89,17 +89,15 @@ def build_model(arch: str, num_classes: int):
         return models.VGG('Vgg11', num_classes=num_classes)
     if a == "vgg16":
         return models.VGG('Vgg16', num_classes=num_classes)
-    if a == "resnet18_new":
-        return models_new.resnet18(num_classes=num_classes)
+    if a == "stannet":
+        return stan_models.stanNet_complex(num_classes=num_classes)
     raise ValueError(f"Unknown arch: {arch}")
 
-
-def save_checkpoint(state, out_dir: Path):
+def save_checkpoint(state, out_dir: Path, filename: str = "best"):
     out_dir.mkdir(parents=True, exist_ok=True)
-    path = out_dir / "best.pth"
+    path = out_dir / f"{filename}.pth"
     torch.save(state, path)
     return str(path)
-
 
 def train_one_epoch(model, loader, optimizer, ce_loss, lamb_phase, device, num_classes: int):
     model.train()
@@ -133,7 +131,6 @@ def train_one_epoch(model, loader, optimizer, ce_loss, lamb_phase, device, num_c
 
     return run_loss / max(1, len(loader)), correct / max(1, total)
 
-
 @torch.no_grad()
 def evaluate(model, loader, ce_loss, device, num_classes: int):
     model.eval()
@@ -157,12 +154,11 @@ def evaluate(model, loader, ce_loss, device, num_classes: int):
 
     return run_loss / max(1, len(loader)), correct / max(1, total)
 
-
 def main():
     p = argparse.ArgumentParser(description="Yoga pose classification (single-folder) with complex CNNs")
     p.add_argument("--root", type=str, required=True, help="Path to yogaPose folder with class subfolders")
     p.add_argument("--arch", type=str, default="resnet18",
-                   choices=["resnet18", "resnet50", "alexnet", "vgg11", "vgg16", "resnet18_new"])
+                   choices=["resnet18", "resnet50", "alexnet", "vgg11", "vgg16", "stannet"],)
     p.add_argument("--image_size", type=int, default=224)
     p.add_argument("--val_ratio", type=float, default=0.2)
     p.add_argument("--batch_size", type=int, default=16)
@@ -174,6 +170,7 @@ def main():
     p.add_argument("--strong_aug", action="store_true", help="Enable flip/rotation")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--out_dir", type=str, default="saved_models/yoga_single")
+    p.add_argument("--modelName", type=str, default="best_model")
 
     args = p.parse_args()
 
@@ -244,13 +241,12 @@ def main():
                 "image_size": args.image_size,
             }
 
-            path = save_checkpoint(ckpt, out_dir)
+            path = save_checkpoint(ckpt, out_dir, args.modelName)
             print(f"Saved best checkpoint to: {path}")
             best_acc = va_acc
 
         print(f"Epoch {epoch + 1}: train_loss={tr_loss:.4f} train_acc={tr_acc:.4f} "
               f"val_loss={va_loss:.4f} val_acc={va_acc:.4f} best={best_acc:.4f}")
-
 
 if __name__ == "__main__":
     main()
