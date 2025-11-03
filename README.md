@@ -44,9 +44,10 @@ You can run the code by using the following command.
 
 For validation of the models that is saved in `saved_models/`
 ```
-  python validation.py \
-  --k 20 \
-  --model bestStanNet
+  python validation.py --model_dir ./saved_models --image test.jpg
+  python validation.py --model_dir ./saved_models --image test.jpg --model_name best.pth
+  python validation.py --model_dir ./saved_models --image test.jpg --device cuda
+  python validation.py --list-archs  # Show all available architectures
 ```
 `Note` - For detailed explanation of each argument you can refer to python script `validation.py`
 

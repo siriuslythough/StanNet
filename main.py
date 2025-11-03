@@ -169,7 +169,7 @@ def main():
     p.add_argument("--lamb_phase", type=float, default=0.05)  # small default; set 0.0 to disable
     p.add_argument("--strong_aug", action="store_true", help="Enable flip/rotation")
     p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--out_dir", type=str, default="saved_models/yoga_single")
+    p.add_argument("--out_dir", type=str, default="saved_models/")
     p.add_argument("--modelName", type=str, default="best_model")
 
     args = p.parse_args()
@@ -235,7 +235,7 @@ def main():
                 "model": model.state_dict(),
                 "epoch": epoch,
                 "val_acc": va_acc,
-                "arch": args.arch,
+                "arch": args.arch.lower(), # normalize to lowercase
                 "classes": classes,
                 "num_classes": num_classes,
                 "image_size": args.image_size,
