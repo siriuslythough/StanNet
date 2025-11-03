@@ -123,7 +123,7 @@ def build_model(arch: str, num_classes: int):
     if a == "wide_resnet101_2":
         return models.wide_resnet101_2(pretrained=False, progress=True, num_classes=num_classes)
     if a == "alexnet":
-        return models.alexnet(num_classes=num_classes)
+        return models.AlexNet(num_classes=num_classes)
     if a == "vgg11":
         return models.VGG('Vgg11', num_classes=num_classes)
     if a == "vgg13":
