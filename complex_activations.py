@@ -2,8 +2,8 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-
-
+############### Complex Activation Functions ###############
+# Complex ReLU
 class CReLU(nn.Module):
     def __init__(self):
         super().__init__()
@@ -11,6 +11,7 @@ class CReLU(nn.Module):
     def forward(self, x):
         return F.relu(x.real).type(torch.complex64) + 1j * F.relu(x.imag).type(torch.complex64)
 
+# Complex PReLU
 class CPReLU(nn.Module):
     def __init__(self, num_channels= 1):
         super().__init__()
@@ -21,9 +22,18 @@ class CPReLU(nn.Module):
     def forward(self, x):
         return self.real_prelu(x.real).type(torch.complex64) + 1j * self.imag_prelu(x.imag).type(torch.complex64)
 
+# zReLU Activation Function
 class zReLU(nn.Module):
-    pass
+    def __init__(self):
+        super().__init__()
 
+    def forward(self, x):
+        real = x.real
+        imag = x.imag
+        mask = (real > 0) & (imag > 0)
+        return (real * mask).type(torch.complex64) + 1j * (imag * mask).type(torch.complex64)   
+
+# Naive Complex Sigmoid and Tanh
 class Naive_ComplexSigmoid(nn.Module):
     def __init__(self):
         super().__init__()
@@ -31,6 +41,7 @@ class Naive_ComplexSigmoid(nn.Module):
     def forward(self, x):
         return F.sigmoid(x.real).type(torch.complex64) + 1j * F.sigmoid(x.imag).type(torch.complex64)
 
+# Naive Complex Tanh
 class Naive_ComplexTanh(nn.Module):
     def __init__(self):
         super().__init__()
