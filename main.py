@@ -1,3 +1,28 @@
+"""Train yoga pose classifiers (complex & real-valued backbones).
+
+Usage
+-----
+python main.py --root YogaPoses --arch resnet50 --epochs 50 --batch_size 8 --lr 3e-4 --modelName resnet50
+
+Args (highlights)
+-----------------
+--root: Dataset root with class subfolders.
+--arch: resnet18|resnet50|alexnet|vgg11|vgg16|stannet
+--image_size: Input size (default 224)
+--val_ratio: Validation split ratio (default 0.2)
+--batch_size, --epochs, --lr, --weight_decay, --num_workers
+--lamb_phase: Phase-loss weight (float, default 0.05)
+--strong_aug: Enable stronger spatial augments (flag)
+--seed: RNG seed (default 42)
+--out_dir: Output directory for checkpoints (default saved_models/)
+--modelName: Base name for saved checkpoints (default best_model)
+
+Notes
+-----
+- Auto-detects CUDA if available.
+- Uses HSV→complex conversion from utils.ToHSV/ToComplex.
+"""
+
 import os
 import argparse
 from pathlib import Path

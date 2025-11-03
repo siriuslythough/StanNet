@@ -1,3 +1,10 @@
+"""Tkinter GUI for demoing generic image classification.
+
+- Choose a model from `saved_models/` and an input image.
+- Displays predicted class(es) and probabilities.
+- Threaded inference to keep UI responsive.
+"""
+
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from pathlib import Path

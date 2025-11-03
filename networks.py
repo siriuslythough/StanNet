@@ -1,3 +1,10 @@
+"""
+Backbone definitions and wiring for (complex) classifiers.
+
+- Factory functions to build requested architecture.
+- Integration with complex layers/activations when applicable.
+"""
+
 import torch
 from typing import Type, Any, Callable, Union, List, Optional
 from torch import Tensor

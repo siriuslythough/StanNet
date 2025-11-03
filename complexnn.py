@@ -1,3 +1,9 @@
+"""
+Complex-valued neural network layers.
+
+- Convolution, normalization, linear ops for complex tensors.
+- Drop-in building blocks used by stanNet and other complex backbones.
+"""
 from typing import TypeVar, Union
 import torch
 from torch import nn

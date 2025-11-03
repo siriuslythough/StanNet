@@ -1,3 +1,11 @@
+"""
+Utility transforms and helpers.
+
+- ToHSV: Custom RGB→HSV conversion compatible with complex pipeline.
+- ToComplex: Stack HSV into complex tensor channels.
+- progress_bar: Minimal training loop progress display.
+"""
+
 import os
 import time
 import sys

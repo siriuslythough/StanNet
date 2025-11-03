@@ -1,8 +1,11 @@
-# networks_novel.py
-import math
+"""Custom complex CNN (stanNet) for generic image classification.
+
+- Example architecture showcasing complex layers + attention/stacks.
+- Exposes a factory `stanNet_complex(num_classes: int)`.
+"""
+
 import torch
 from torch import nn
-import torch.nn.functional as F
 
 from complexnn import (
     ComplexConv2d,

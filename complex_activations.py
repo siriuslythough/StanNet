@@ -1,3 +1,8 @@
+"""
+Activation functions for complex-valued networks (e.g., zReLU, modReLU).
+
+- Implementations are numerically stable and PyTorch-friendly.
+"""
 import torch
 from torch import nn
 import torch.nn.functional as F

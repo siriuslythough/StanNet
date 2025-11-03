@@ -1,3 +1,15 @@
+"""One-shot image classification with a saved checkpoint (generic, not task‑specific).
+
+Usage
+-----
+python validation.py --model_dir ./saved_models --image path/to/image.jpg [--model_name best.pth] [--device cuda] [--list-archs]
+
+Behavior
+--------
+- Loads model architecture + weights, builds complex transforms, and prints Top-K predictions.
+- Works with complex and baseline backbones.
+"""
+
 import argparse
 from pathlib import Path
 from typing import Optional, List
