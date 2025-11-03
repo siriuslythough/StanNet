@@ -114,6 +114,7 @@ To check the number of parameter of a specific architecture
 ```bash
 python main.py \
   --root DATASET_ROOT \
+  --arch stanet \
   --num_params
 ```
 `Note`  --root is required because no. of parameters depends on number of classes in the dataset.
