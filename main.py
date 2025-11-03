@@ -106,17 +106,39 @@ def build_model(arch: str, num_classes: int):
     a = arch.lower()
     if a == "resnet18":
         return models.resnet18(num_classes=num_classes)
+    if a == "resnet34":
+        return models.resnet34(num_classes=num_classes)
     if a == "resnet50":
         return models.resnet50(num_classes=num_classes)
+    if a == "resnet101":
+        return models.resnet101(num_classes=num_classes)
+    if a == "resnet152":
+        return models.resnet152(num_classes=num_classes)
+    if a == "resnext50_32x4d":
+        return models.resnext50_32x4d(pretrained=False, progress=True, num_classes=num_classes)
+    if a == "resnext101_32x8d":
+        return models.resnext101_32x8d(pretrained=False, progress=True, num_classes=num_classes)
+    if a == "wide_resnet50_2":
+        return models.wide_resnet50_2(pretrained=False, progress=True, num_classes=num_classes)
+    if a == "wide_resnet101_2":
+        return models.wide_resnet101_2(pretrained=False, progress=True, num_classes=num_classes)
     if a == "alexnet":
-        return models.AlexNet(num_classes=num_classes)
+        return models.alexnet(num_classes=num_classes)
     if a == "vgg11":
         return models.VGG('Vgg11', num_classes=num_classes)
+    if a == "vgg13":
+        return models.VGG('Vgg13', num_classes=num_classes)
     if a == "vgg16":
         return models.VGG('Vgg16', num_classes=num_classes)
+    if a == "vgg19":
+        return models.VGG('Vgg19', num_classes=num_classes)
     if a == "stannet":
         return stan_models.stanNet_complex(num_classes=num_classes)
-    raise ValueError(f"Unknown arch: {arch}")
+    if a == "cds_e":
+        # Assuming there's a model for CDS-e, replace with actual model call
+        return stan_models.cds_e_model(num_classes=num_classes)
+    raise ValueError(f"Unknown architecture: {arch}")
+
 
 def save_checkpoint(state, out_dir: Path, filename: str = "best"):
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -183,7 +205,13 @@ def main():
     p = argparse.ArgumentParser(description="Yoga pose classification (single-folder) with complex CNNs")
     p.add_argument("--root", type=str, required=True, help="Path to yogaPose folder with class subfolders")
     p.add_argument("--arch", type=str, default="resnet18",
-                   choices=["resnet18", "resnet50", "alexnet", "vgg11", "vgg16", "stannet"],)
+                   choices=["stannet",  # stanNet complex
+                            "cds_e",    # cds-e complex
+                            "alexnet",  # AlexNet
+                            "vgg11", "vgg13", "vgg16", "vgg19",     # VGG variants
+                            "resnet18", "resnet34", "resnet50", "resnet101", "resnet152", # ResNet variants
+                            "resnext50_32x4d", "resnext101_32x8d",  # ResNeXt variants
+                            "wide_resnet50_2", "wide_resnet101_2"]) # Wide ResNet variants     
     p.add_argument("--image_size", type=int, default=224)
     p.add_argument("--val_ratio", type=float, default=0.2)
     p.add_argument("--batch_size", type=int, default=16)
