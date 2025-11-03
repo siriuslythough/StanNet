@@ -109,7 +109,7 @@ This will create `saved_models/stannet_v1_*.pth` and print training/validation m
 | `--out_dir` | str | `saved_models/` | Output directory for checkpoints. |
 | `--modelName` | str | `best_model` | Base name for saved checkpoint(s). |
 
-> Device is auto‑detected (CUDA if available, otherwise CPU) inside the scripts.
+> Device is auto‑detected (CUDA if available then MPS if available otherwise CPU) inside the scripts.
 
 ## Validate / Inference
 Classify a single image with a saved model:
