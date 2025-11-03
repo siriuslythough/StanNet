@@ -196,6 +196,7 @@ def main():
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--out_dir", type=str, default="saved_models/")
     p.add_argument("--modelName", type=str, default="best_model")
+    p.add_argument("--num_params", action="store_true", help="Print model parameter count")
 
     args = p.parse_args()
 
@@ -243,6 +244,12 @@ def main():
                             num_workers=args.num_workers, pin_memory=pin)
 
     model = build_model(args.arch, num_classes=num_classes).to(device)
+
+    # print model parameter count if requested
+    if args.num_params:
+        param_count = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        print(f"Model parameter count for {args.arch}: {param_count}")
+        return
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     ce_loss = nn.CrossEntropyLoss()

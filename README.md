@@ -108,6 +108,15 @@ This will create `saved_models/stannet_v1_*.pth` and print training/validation m
 | `--seed` | int | `42` | Random seed for split & training. |
 | `--out_dir` | str | `saved_models/` | Output directory for checkpoints. |
 | `--modelName` | str | `best_model` | Base name for saved checkpoint(s). |
+| `--num_params` | set/unset | `not required` | returns the number of parameter of --arch |
+
+To check the number of parameter of a specific architecture
+```bash
+python main.py \
+  --root DATASET_ROOT \
+  --num_params
+```
+`Note`  --root is required because no. of parameters depends on number of classes in the dataset.
 
 > Device is auto‑detected (CUDA if available then MPS if available otherwise CPU) inside the scripts.
 
