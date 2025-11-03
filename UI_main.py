@@ -22,10 +22,10 @@ from validation import (
     find_saved_models
 )
 
-class YogaPoseClassifierUI:
+class GenericImageClassifierApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Yoga Pose Classifier")
+        self.root.title("Fully Complex CNNs Generic Image Classifier")
         self.root.geometry("900x750")
         self.root.resizable(True, True)
         
@@ -287,7 +287,7 @@ class YogaPoseClassifierUI:
 
 def main():
     root = tk.Tk()
-    app = YogaPoseClassifierUI(root)
+    app = GenericImageClassifierApp(root)
     root.mainloop()
 
 if __name__ == "__main__":
