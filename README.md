@@ -74,7 +74,7 @@ DATASET_ROOT/
 ```
 Use the path to this folder with `--root`.
 
-> Example source: public pose datasets (e.g., YogaPoses) work out‑of‑the‑box, but StanNet is not restricted to poses.
+> Example source: public YogaPoses datasets work out‑of‑the‑box, but StanNet is not restricted to poses.
 
 ## Quickstart
 ### Train (example)
@@ -95,7 +95,7 @@ This will create `saved_models/stannet_v1_*.pth` and print training/validation m
 | Flag | Type | Default | Notes |
 |---|---|---:|---|
 | `--root` | str | **required** | Path to dataset root (folder with class subfolders). |
-| `--arch` | str | `resnet18` | One of: `resnet18`, `resnet50`, `alexnet`, `vgg11`, `vgg16`, `stannet`. |
+| `--arch` | str | `resnet18` | One of: `stannet`, `resnet18`, `resnet34`, `resnet50`, `resnet101`, `resnet152`, `resnext50_32x4d`, `resnext101_32x8d`, `wide_resnet50_2`, `wide_resnet101_2`, `alexnet`, `vgg11`, `vgg13`, `vgg16`, `vgg19`, `cds_e` |
 | `--image_size` | int | `224` | Input image size. |
 | `--val_ratio` | float | `0.2` | Validation split ratio (stratified). |
 | `--batch_size` | int | `16` | Batch size. |
