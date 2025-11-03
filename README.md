@@ -42,6 +42,14 @@ You can run the code by using the following command.
 ```
 `Note` - For detailed explanation of each argument you can refer to python script `main.py`
 
+For validation of the models that is saved in `saved_models/`
+```
+  python validation.py \
+  --k 20 \
+  --model bestStanNet
+```
+`Note` - For detailed explanation of each argument you can refer to python script `validation.py`
+
 ## Overview
 This project builds a robust Yoga pose classification pipeline in PyTorch. It provides a clean training script, configurable architectures, and strong data augmentation to recognize multiple yoga postures from images. While you can use standard backbones like ResNet-50 as a baseline, the core contribution is experimenting with fully complex-valued convolutional neural networks to better capture phase-and-magnitude cues present in human pose textures and edges (as highlighted in the project title). Training, evaluation, and logging are all handled from a single entry script with simple CLI flags.
 
