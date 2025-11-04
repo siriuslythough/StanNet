@@ -1,4 +1,4 @@
-# StanNet: Fully Complex-valued CNNs for Generic Image Classification
+# StanNet: Fully Complex CNNs for Generic Image Classification
 
 _A EE604 Course Project — IIT Kanpur_
 
@@ -109,6 +109,8 @@ This will create `saved_models/stannet_v1_*.pth` and print training/validation m
 | `--out_dir` | str | `saved_models/` | Output directory for checkpoints. |
 | `--modelName` | str | `best_model` | Base name for saved checkpoint(s). |
 | `--num_params` | set/unset | `not required` | returns the number of parameter of --arch |
+
+> Note: You can also specify CIFAR10 as the value for the --root argument. The script will then automatically download the CIFAR-10 dataset and proceed to train the model on it.
 
 To check the number of parameter of a specific architecture
 ```bash

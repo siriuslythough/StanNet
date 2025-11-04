@@ -203,7 +203,7 @@ def evaluate(model, loader, ce_loss, device, num_classes: int):
 
 def main():
     p = argparse.ArgumentParser(description="Yoga pose classification (single-folder) with complex CNNs")
-    p.add_argument("--root", type=str, required=True, help="Path to yogaPose folder with class subfolders")
+    p.add_argument("--root", type=str, required=True, help="Path to Dataset folder with class subfolders or use 'CIFAR10' to train on CIFAR-10")
     p.add_argument("--arch", type=str, default="resnet18",
                    choices=["stannet",  # stanNet complex
                             "cds_e",    # cds-e complex
@@ -228,9 +228,9 @@ def main():
 
     args = p.parse_args()
 
-    # Validate root path exists
+    # Validate root path exists unless user explicitly wants CIFAR-10
     root_path = Path(args.root)
-    if not root_path.exists():
+    if args.root.lower() != "cifar10" and not root_path.exists():
         print(f"Error: Dataset path does not exist: {args.root}")
         return
 
@@ -247,18 +247,37 @@ def main():
 
     train_tf, val_tf = build_transforms(args.image_size, strong_aug=args.strong_aug)
 
-    # Build a base dataset to compute a stratified split
-    base = torchvision.datasets.ImageFolder(root=args.root, transform=None)
-    classes = base.classes
-    targets = base.targets
-    train_idx, val_idx = stratified_indices(targets, val_ratio=args.val_ratio, seed=args.seed)
+    # If user asked for CIFAR-10 (pass --root CIFAR10), use CIFAR-10 datasets and stratified split
+    if args.root.lower() == "cifar10":
+        # download root will be the given root path (or current dir if they passed CIFAR10 without full path)
+        download_root = "./cifar_data"
+        os.makedirs(download_root, exist_ok=True)
+        # create a base train dataset (no transform) to obtain class list and targets and download if needed
+        base = torchvision.datasets.CIFAR10(root=download_root, train=True, download=True, transform=None)
+        classes = base.classes
+        targets = base.targets  # list of labels for the 50k training images
 
-    # Two views with different transforms over the same files
-    train_set = torchvision.datasets.ImageFolder(root=args.root, transform=train_tf)
-    val_set = torchvision.datasets.ImageFolder(root=args.root, transform=val_tf)
+        # Create datasets with transforms (download flag True to ensure files are present)
+        train_set = torchvision.datasets.CIFAR10(root=download_root, train=True, download=True, transform=train_tf)
+        val_set = torchvision.datasets.CIFAR10(root=download_root, train=True, download=True, transform=val_tf)
 
-    train_sub = Subset(train_set, train_idx)
-    val_sub = Subset(val_set, val_idx)
+        train_idx, val_idx = stratified_indices(targets, val_ratio=args.val_ratio, seed=args.seed)
+
+        train_sub = Subset(train_set, train_idx)
+        val_sub = Subset(val_set, val_idx)
+    else:
+        # Original ImageFolder behavior for yoga poses / other folder-of-folders datasets
+        base = torchvision.datasets.ImageFolder(root=args.root, transform=None)
+        classes = base.classes
+        targets = base.targets
+        train_idx, val_idx = stratified_indices(targets, val_ratio=args.val_ratio, seed=args.seed)
+
+        # Two views with different transforms over the same files
+        train_set = torchvision.datasets.ImageFolder(root=args.root, transform=train_tf)
+        val_set = torchvision.datasets.ImageFolder(root=args.root, transform=val_tf)
+
+        train_sub = Subset(train_set, train_idx)
+        val_sub = Subset(val_set, val_idx)
 
     num_classes = len(classes)
 
