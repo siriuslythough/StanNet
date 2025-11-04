@@ -1,4 +1,4 @@
-# StanNet: Fully Complex CNNs for Generic Image Classification
+# StanNet: Fully Complex-valued CNNs for Generic Image Classification
 
 _A EE604 Course Project — IIT Kanpur_
 
