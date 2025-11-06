@@ -3,3 +3,5 @@ YogaPoses
 __pycache__/
 .DS_Store
 saved_models/
+cifar_data/
+logs/        
