@@ -169,10 +169,11 @@ Select a checkpoint from `saved_models/` and an image file; predictions appear i
 - **CUDA not used:** Ensure PyTorch + CUDA build, or run with CPU (auto‑fallback).
 
 ## License & Usage
-This repository is for **academic use only** as part of IIT Kanpur EE604 coursework. Unauthorised commercial use is prohibited. © 2025 Mohd Amir, Nishant Pandey. All rights reserved.
+This repository is for **academic use only** as part of IIT Kanpur EE604 coursework. Unauthorised commercial use is prohibited. © 2025 Mohd Amir, Nishant Pandey & Tanmay Siddharth. All rights reserved.
 
 ## Authors
-- Mohd Amir — mufeed.amir.17290@gmail.com
+- Mohd Amir — mufeed.amir.17290@gmail.com (primary) | mmamir22@iitk.ac.in
 - Nishant Pandey — nishantp22@iitk.ac.in
+- Tanmay Siddharth - tanmays22@iitk.ac.in
 ---
 
