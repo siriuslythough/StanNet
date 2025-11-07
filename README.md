@@ -76,6 +76,10 @@ Use the path to this folder with `--root`.
 
 > Example source: public YogaPoses datasets work out‑of‑the‑box, but StanNet is not restricted to poses.
 
+#### Dataset we used for expermentation
+* [Yoga Poses](https://www.kaggle.com/datasets/ujjwalchowdhury/yoga-pose-classification)
+* [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html)
+
 ## Quickstart
 ### Train (example)
 ```bash
@@ -116,10 +120,10 @@ To check the number of parameter of a specific architecture
 ```bash
 python main.py \
   --root DATASET_ROOT \
-  --arch stanet \
+  --arch stannet \
   --num_params
 ```
-`Note`  --root is required because no. of parameters depends on number of classes in the dataset.
+`Note`  --root is required because num_classe is required to load the model (architecture).
 
 > Device is auto‑detected (CUDA if available then MPS if available otherwise CPU) inside the scripts.
 
@@ -165,15 +169,10 @@ Select a checkpoint from `saved_models/` and an image file; predictions appear i
 - **CUDA not used:** Ensure PyTorch + CUDA build, or run with CPU (auto‑fallback).
 
 ## License & Usage
-This repository is for **academic use only** as part of IIT Kanpur EE604 coursework. Unauthorised commercial use is prohibited. © 2024 Mohd Amir, Nishant Pandey & Tanmay Siddharth. All rights reserved.
-
-## Citation
-> S. Yadav and K. R. Jerripothula, “FCCNs: Fully Complex‑valued Convolutional Networks using Complex‑valued Color Model and Loss Function,” ICCV 2023.
+This repository is for **academic use only** as part of IIT Kanpur EE604 coursework. Unauthorised commercial use is prohibited. © 2025 Mohd Amir, Nishant Pandey. All rights reserved.
 
 ## Authors
-- Mohd Amir — mmamir22@iitk.ac.in
+- Mohd Amir — mufeed.amir.17290@gmail.com
 - Nishant Pandey — nishantp22@iitk.ac.in
-- Tanmay Siddharth — tanmays22@iitk.ac.in
-
 ---
 
